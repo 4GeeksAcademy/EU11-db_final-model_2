@@ -70,24 +70,30 @@ class Favorite(Base):
     __tablename__ = 'favorite'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
+    # user_id = Column(Integer, ForeignKey("user.id"), primary_key=True, nullable=False)
     user_table = relationship('User', backref="favorite")
     stadium_id = Column(Integer, ForeignKey("stadium.id"), nullable=False)
+    # stadium_id = Column(Integer, ForeignKey("stadium.id"), primary_key=True, nullable=False)
     stadium_table = relationship('Stadium', backref="favorite")
     
 class Visisted(Base):
     __tablename__ = 'visited'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
+    # user_id = Column(Integer, ForeignKey("user.id"), primary_key=True, nullable=False)
     user_table = relationship('User', backref="visited")
     stadium_id = Column(Integer, ForeignKey("stadium.id"), nullable=False)
+    # stadium_id = Column(Integer, ForeignKey("stadium.id"), primary_key=True, nullable=False)
     stadium_table = relationship('Stadium', backref="visited")
 
 class Review(Base):
     __tablename__ = 'review'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
+    # user_id = Column(Integer, ForeignKey("user.id"), primary_key=True, nullable=False)
     user_table = relationship('User', backref="review")
     stadium_id = Column(Integer, ForeignKey("stadium.id"), nullable=False)
+    # stadium_id = Column(Integer, ForeignKey("stadium.id"), primary_key=True, nullable=False)
     stadium_table = relationship('Stadium', backref="review")
     review_rating = Column(Integer, nullable=False) # to make it Impossible to send a review witout a rating
     review_text = Column(String(1000), nullable=True) # to make it possible to send a review witout a text
@@ -104,8 +110,6 @@ class Stadium(Base):
     favorite_table = relationship('Favorite', backref="stadium")
     visited_table = relationship('Visited', backref="stadium")
     review_table = relationship('Review', backref="stadium")
-
-
 
 ## Draw from SQLAlchemy base
 render_er(Base, 'diagram.png')
